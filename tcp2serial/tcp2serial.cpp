@@ -22,6 +22,10 @@ SoftwareSerial mySerial(5, 6); // RX, TX
 byte mac[] = {  
   0x90, 0xA2, 0xDA, 0x0D, 0x44, 0x85 };
 IPAddress ip(192,168,1,177);
+byte gateway[] = { 
+  150,101,0,4 }; // internet access via router
+byte subnet[] = { 
+  255, 255, 0, 0 }; //subnet mask
 
 EthernetServer server(1235);
 
@@ -33,7 +37,7 @@ void setup()
     ; // wait for serial port to connect. Needed for Leonardo only
   }
 
-  Ethernet.begin(mac, ip);
+  Ethernet.begin(mac, ip, gateway, subnet);
   server.begin();
   Serial.print("server is at ");
   Serial.println(Ethernet.localIP());
